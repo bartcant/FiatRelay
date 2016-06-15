@@ -1,6 +1,8 @@
 # [Fiat Relay]
 
-[Fiat Relay]is an Ethereum contract for Bitcoin SPV.  The main functionality it provides are:
+[Fiat Relay] is an Ethereum contract that can be leveraged by other Ethereum Contracts for conversion to Fiat (using an Exchange) and payment via traditional fiat Payment Services (provided by Bank XXX)
+
+The main functionality it provides are:
 
 1. verification of an Ethereum message (eg. An Ethereum Contract has provided a payment for X amount of Ether to the FiatRelay Ethereum contract
 

@@ -1,20 +1,30 @@
-# [BTC Relay](http://btcrelay.org)
+# [Fiat Relay]
 
-[![Join the chat at https://gitter.im/ethereum/btcrelay](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ethereum/btcrelay)
+[Fiat Relay] is an Ethereum contract that can be leveraged by other Ethereum Contracts for conversion to Fiat (using an Exchange) and payment via traditional fiat Payment Services (provided by Bank XXX)
 
-[BTC Relay](http://btcrelay.org) is an Ethereum contract for Bitcoin SPV.  The main functionality it provides are:
+The main functionality it provides are:
 
-1. verification of a Bitcoin transaction
-1. optionally relay the Bitcoin transaction to any Ethereum contract
-1. storage of Bitcoin block headers
-1. inspection of the latest Bitcoin block header stored in the contract
+1. verification of an Ethereum message (eg. An Ethereum Contract has provided a payment for X amount of Ether to the FiatRelay Ethereum contract
 
-## BTC Relay contract address and ABI:
+Contracts have the ability to send "messages" to other contracts. Messages are virtual objects that are never serialized and exist only in the Ethereum execution environment. A message contains:
+* The sender of the message (implicit)
+* The recipient of the message
+* The amount of ether to transfer alongside the message
+* An optional data field
+* A STARTGAS value
 
-* [mainnet](http://btcrelay.surge.sh/mainnetStatus.html)
-* [testnet Morden](http://btcrelay.surge.sh/testnetContractStatus.html)
+Essentially, a message is like a transaction, except it is produced by a contract and not an external actor.
+Note that the gas allowance assigned by a transaction or contract applies to the total gas consumed by that transaction and all sub-executions. For example, if an external actor A sends a transaction to B with 1000 gas, and B consumes 600 gas before sending a message to C, and the internal execution of C consumes 300 gas before returning, then B can spend another 100 gas before running out of gas.
+(source - https://github.com/ethereum/wiki/wiki/White-Paper#ethereum-accounts)
 
-The address and ABI is all that's needed to use BTC Relay, in addition to the API documentation below.
+
+
+## Fiat Relay contract address and ABI: (Work in Progress)
+
+* [mainnet](http://fiatrelay.surge.sh/mainnetStatus.html)
+* [testnet Morden](http://fiatrelay.surge.sh/testnetContractStatus.html)
+
+The address and ABI is all that's needed to use Fiat Relay, in addition to the API documentation below.
 
 ## API
 
@@ -135,143 +145,6 @@ or Bitcoin network difficulty (which can be derived) as a data feed.
 See [BitcoinRelayAbi.js](examples/BitcoinRelayABI.js) for other APIs and [testnetContractStatus.html](examples/testnetContractStatus.html) for an example of calling some of them.
 
 ----
-
-##### Incentives
-
-The following APIs are described in `Incentives for Relayers` below.
-
-`storeBlockWithFee()`, `changeFeeRecipient()`, `getFeeRecipient()`, `getFeeAmount()`, `getChangeRecipientFee()`
-
-----
-
-## Examples
-
-[Examples](https://github.com/ethereum/btcrelay/tree/master/examples) for how to use BTC Relay include:
-
-* [testnetSampleCall.html](http://btcrelay.surge.sh/testnetSampleCall.html) for calling [`verifyTx`](#verifytxrawtransaction-transactionindex-merklesibling-blockhash) including use of [bitcoin-proof](https://www.npmjs.com/package/bitcoin-proof) for constructing `merkleSibling`.
-
-* mainnet [sampleCall.html](http://btcrelay.surge.sh/sampleCall.html) for calling [`verifyTx`](#verifytxrawtransaction-transactionindex-merklesibling-blockhash)
-(very similar to above.)
-
-* [testnetSampleRelayTx.html](http://btcrelay.surge.sh/testnetSampleRelayTx.html) shows [`relayTx`](#relaytxrawtransaction-transactionindex-merklesibling-blockhash-contractaddress) relaying a Bitcoin transaction from the frontend to an Ethereum contract.
-
-* [testnetContractStatus.html](examples/testnetContractStatus.html) for calling other basic functions.
-
-----
-
-## How to use BTC Relay
-
-The easiest way to use BTC Relay is via [`relayTx`](#relaytxrawtransaction-transactionindex-merklesibling-blockhash-contractaddress) because the ABI can remain on the frontend.
-
-[testnetSampleRelayTx.html](http://btcrelay.surge.sh/testnetSampleRelayTx.html) shows how a Bitcoin transaction from the frontend can be passed (relayed) to an Ethereum contract.
-
-See other [examples](#examples) for other ways to use BTC Relay and the
-[docs for FAQ.](http://btc-relay.readthedocs.io)
-
-----
-
-## Incentives for Relayers
-
-Relayers are those who submit block headers to BTC Relay.  To incentivize the community
-to be relayers, and thus allow BTC Relay to be autonomous and up-to-date with the
-Bitcoin blockchain, Relayers can call `storeBlockWithFee`.  The Relayer will be the
-`getFeeRecipient()` for the block they submit, and when any transactions are verified
-in the block, or the header is retrieved via `getBlockHeader`, the Relayer will be
- rewarded with `getFeeAmount()`.
-
-[To avoid a relayer R1 from setting excessive fees](http://btc-relay.readthedocs.io/en/latest/frequently-asked-questions.html#what-prevents-fees-from-being-too-high), it is possible for a relayer R2
-to `changeFeeRecipient()`.  R2 must specify a fee lower than what R1 specified, and
-pay `getChangeRecipientFee()` to R1, but now R2 will be the `getFeeRecipient()` for the block
-and will earn all future `getFeeAmount()`.
-
-With this background, here are API details for incentives.
-
-##### storeBlockWithFee(blockHeader, fee)
-
-Store a single block header (like `storeBlockHeader`) and
-set a fee that will be charged for verifications that use `blockHeader`.
-
-* `blockHeader` - raw `bytes` of the block header (not the hex string, but the actual bytes).
-* `fee` - `int256` amount in wei.
-
-Returns `int256`
-* block height of the header if it was successfully stored
-* `0` otherwise
-
-----
-
-##### changeFeeRecipient(blockHash, fee, recipient)
-
-Set the `fee` and `recipient` for a given `blockHash`.  The call must have `msg.value`
-of at least `getChangeRecipientFee()`, and must also specify a `fee` lower than
-the current `getFeeAmount(blockHash)`.
-
-* `blockHash` - hash of the block as `int256`.
-* `fee` - `int256` amount in wei.
-* `recipient` - `int256` address of the recipient of fees.
-
-Returns `int256`
-* `1` if the fee and recipient were successfully set
-* `0` otherwise
-
-----
-
-##### getFeeRecipient(blockHash)
-
-Get the address that receives the fees for a given `blockHash`.
-
-* `blockHash` - hash of the block as `int256`.
-
-Returns `int256`
-* address of the recipient
-
-----
-
-##### getFeeAmount(blockHash)
-
-Get the fee amount in wei for verifications using a given `blockHash`.
-
-* `blockHash` - hash of the block as `int256`.
-
-Returns `int256`
-* amount of the fee in wei.
-
-----
-
-##### getChangeRecipientFee()
-
-Get the amount of wei required that must be sent to BTC Relay when calling
-`changeFeeRecipient`.
-
-Returns `int256`
-* amount of wei
-
-----
-
-## Development
-
-Requirements
-* [Serpent](https://github.com/ethereum/serpent)
-* [pyethereum](https://github.com/ethereum/pyethereum) (for tests)
-* [pyepm](https://github.com/etherex/pyepm) (for deployment)
-
-#### Running tests
-
-Exclude slow tests:
-```
-py.test test/ -s -m "not slow"
-```
-
-Run slow tests without veryslow tests
-```
-py.test test/ -s -m "slow and not veryslow"
-```
-
-All tests:
-```
-py.test test/ -s
-```
-
 
 ## License
 

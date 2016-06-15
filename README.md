@@ -1,30 +1,73 @@
 # [Fiat Relay]
 
-[Fiat Relay] is an Ethereum contract that can be leveraged by other Ethereum Contracts for conversion to Fiat (using an Exchange) and payment via traditional fiat Payment Services (provided by Bank XXX)
+[Fiat Relay] is a bank specific solution that contains a number of different components:
+1. A Smart Contract: This is an Ethereum contract that can be leveraged by other Ethereum Contracts for paying a Beneficiary Person, company or Organizatioin the Fiat equivalent of the Ether Balance.
+2. An Crypto Exchnage Function:  This is an automated and real-time Ether to fiat Exhange (using an existing USD to ETher Exchange provider (eg. Poloniex)
+3. A Payment Bridge Service: This converts the information Payment  and payment functionality via traditional fiat Payment Services (provided by Bank ABC)
+4. a Customer Service Module: This is a Bank application that stores all records of the transactions and provides tools for customer service reps to investigate or follow up on on specific customer service issues
+5. A Customer Portal: This is a Bank Application that provides a customer friendly Blockexplorer view of the blokchain transactions and data available in the smart contract
 
-The main functionality it provides are:
+The main functionality this solution provides are:
 
-1. verification of an Ethereum message (eg. An Ethereum Contract has provided a payment for X amount of Ether to the FiatRelay Ethereum contract
+1. verification of an Ethereum message that contains the Ether that is specified to be paid to a beneficiary
+(eg. An Ethereum Contract has provided a payment for X amount of Ether to the FiatRelay Ethereum contract)
+2. verification that payment details information is available for the disbursement of the Ether to the beneficiary
+3. Ability to update of the payment status based on the information received from the Bank and the Fiat Payment network
+4. Ability to return the ether funds back to the Originating Ethereum contract incase of failures (eg. insufficient or incorrect payment information, suspicious payment activity )
 
-Contracts have the ability to send "messages" to other contracts. Messages are virtual objects that are never serialized and exist only in the Ethereum execution environment. A message contains:
+
+Note: In Ethereum Contracts have the ability to send "messages" to other contracts. Messages are virtual objects that are never serialized and exist only in the Ethereum execution environment. A message contains:
 * The sender of the message (implicit)
 * The recipient of the message
 * The amount of ether to transfer alongside the message
 * An optional data field
 * A STARTGAS value
 
-Essentially, a message is like a transaction, except it is produced by a contract and not an external actor.
 Note that the gas allowance assigned by a transaction or contract applies to the total gas consumed by that transaction and all sub-executions. For example, if an external actor A sends a transaction to B with 1000 gas, and B consumes 600 gas before sending a message to C, and the internal execution of C consumes 300 gas before returning, then B can spend another 100 gas before running out of gas.
 (source - https://github.com/ethereum/wiki/wiki/White-Paper#ethereum-accounts)
 
 
+For the Fiatrelay contract Traditional Payment information is required:
+* To identify the originator of the transaction
+* to reach the beneficiary for the payment service is required
+* and to guarantee compliance with AML, KYC and other applicable laws.
 
-## Fiat Relay contract address and ABI: (Work in Progress)
+Note: based on regulatory guidelines in the initial phase of the project the maximum fiat equivaluent for payment to the beneficiary will not exceed 1000 USD
 
-* [mainnet](http://fiatrelay.surge.sh/mainnetStatus.html)
-* [testnet Morden](http://fiatrelay.surge.sh/testnetContractStatus.html)
 
-The address and ABI is all that's needed to use Fiat Relay, in addition to the API documentation below.
+The following payment information is required for the Fiatrelay Smart Contract:
+* originator Name
+* originator address 1
+* originator Address 2 -Optional
+* originator City
+* Originator State
+* Originator Country
+* Originator Telephone -Optional
+* Originator email address - Optional
+* Originator blockchain identity (onename)
+
+* Beneficiary Name
+* Beneficiary Bank Account number
+* Beneficiary Bank ABA Number
+* Beneficiary address 1
+* Beneficiary Address 2 - Optional
+* Beneficiary City
+* Beneficiary State
+* Beneficiary Country
+* Beneficiary Telephone - Optional
+* Beneficiary email address - Optional
+* Beneficiary blockchain identity (onename) - Optional
+
+* Ether amount to transfer
+* Ethereum Originating Account - This is the  smart contract initiating the transaction
+* Ethereum Bank Account - this is the bank owned Ethereum Account that will receive the funds in Ether
+* Return Ethereum Address - This is the return address incase the payment transaction is incomplete or invalid
+* Reference Message - Description that travels with the payment transaction
+
+For payment services exceeding 3000 USD additional payment information maybe required
+(see  FinCen regulation for Money Transmitters -  http://www.ecfr.gov/cgi-bin/text-idx?SID=2df5ac33e4575e7be6e95689037843e1&mc=true&node=se31.3.1010_1410&rgn=div8)
+
+
 
 ## API
 

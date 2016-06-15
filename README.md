@@ -1,20 +1,28 @@
-# [BTC Relay](http://btcrelay.org)
+# [Fiat Relay]
 
-[![Join the chat at https://gitter.im/ethereum/btcrelay](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ethereum/btcrelay)
+[Fiat Relay]is an Ethereum contract for Bitcoin SPV.  The main functionality it provides are:
 
-[BTC Relay](http://btcrelay.org) is an Ethereum contract for Bitcoin SPV.  The main functionality it provides are:
+1. verification of an Ethereum message (eg. An Ethereum Contract has provided a payment for X amount of Ether to the FiatRelay Ethereum contract
 
-1. verification of a Bitcoin transaction
-1. optionally relay the Bitcoin transaction to any Ethereum contract
-1. storage of Bitcoin block headers
-1. inspection of the latest Bitcoin block header stored in the contract
+Contracts have the ability to send "messages" to other contracts. Messages are virtual objects that are never serialized and exist only in the Ethereum execution environment. A message contains:
+* The sender of the message (implicit)
+* The recipient of the message
+* The amount of ether to transfer alongside the message
+* An optional data field
+* A STARTGAS value
 
-## BTC Relay contract address and ABI:
+Essentially, a message is like a transaction, except it is produced by a contract and not an external actor.
+Note that the gas allowance assigned by a transaction or contract applies to the total gas consumed by that transaction and all sub-executions. For example, if an external actor A sends a transaction to B with 1000 gas, and B consumes 600 gas before sending a message to C, and the internal execution of C consumes 300 gas before returning, then B can spend another 100 gas before running out of gas.
+(source - https://github.com/ethereum/wiki/wiki/White-Paper#ethereum-accounts)
 
-* [mainnet](http://btcrelay.surge.sh/mainnetStatus.html)
-* [testnet Morden](http://btcrelay.surge.sh/testnetContractStatus.html)
 
-The address and ABI is all that's needed to use BTC Relay, in addition to the API documentation below.
+
+## Fiat Relay contract address and ABI: (Work in Progress)
+
+* [mainnet](http://fiatrelay.surge.sh/mainnetStatus.html)
+* [testnet Morden](http://fiatrelay.surge.sh/testnetContractStatus.html)
+
+The address and ABI is all that's needed to use Fiat Relay, in addition to the API documentation below.
 
 ## API
 

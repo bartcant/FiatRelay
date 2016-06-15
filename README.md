@@ -1,19 +1,20 @@
 # [Fiat Relay]
 
 [Fiat Relay] is a bank specific solution that contains a number of different components:
-1. A Smart Contract: This is an Ethereum contract that can be leveraged by other Ethereum Contracts for paying a Beneficiary Person, company or Organizatioin the Fiat equivalent of the Ether Balance.
-2. An Crypto Exchnage Function:  This is an automated and real-time Ether to fiat Exhange (using an existing USD to ETher Exchange provider (eg. Poloniex)
-3. A Payment Bridge Service: This converts the information Payment  and payment functionality via traditional fiat Payment Services (provided by Bank ABC)
-4. a Customer Service Module: This is a Bank application that stores all records of the transactions and provides tools for customer service reps to investigate or follow up on on specific customer service issues
-5. A Customer Portal: This is a Bank Application that provides a customer friendly Blockexplorer view of the blokchain transactions and data available in the smart contract
+
+1. A Smart Contract: This is an Ethereum contract that can be leveraged by other Ethereum Contracts for paying a Beneficiary Person, company or Organizatioin the Fiat equivalent of the Ether Balance
+1. An Crypto Exchnage Function:  This is an automated and real-time Ether to fiat Exhange (using an existing USD to ETher Exchange provider (eg. Poloniex)
+1. A Payment Bridge Service: This converts the information Payment  and payment functionality via traditional fiat Payment Services (provided by Bank ABC)
+1. a Customer Service Module: This is a Bank application that stores all records of the transactions and provides tools for customer service reps to investigate or follow up on on specific customer service issues
+1. A Customer Portal: This is a Bank Application that provides a customer friendly Blockexplorer view of the blokchain transactions and data available in the smart contract
 
 The main functionality this solution provides are:
 
 1. verification of an Ethereum message that contains the Ether that is specified to be paid to a beneficiary
 (eg. An Ethereum Contract has provided a payment for X amount of Ether to the FiatRelay Ethereum contract)
-2. verification that payment details information is available for the disbursement of the Ether to the beneficiary
-3. Ability to update of the payment status based on the information received from the Bank and the Fiat Payment network
-4. Ability to return the ether funds back to the Originating Ethereum contract incase of failures (eg. insufficient or incorrect payment information, suspicious payment activity )
+1. verification that payment details information is available for the disbursement of the Ether to the beneficiary
+1. Ability to update of the payment status based on the information received from the Bank and the Fiat Payment network
+1. Ability to return the ether funds back to the Originating Ethereum contract incase of failures (eg. insufficient or incorrect payment information, suspicious payment activity )
 
 
 Note: In Ethereum Contracts have the ability to send "messages" to other contracts. Messages are virtual objects that are never serialized and exist only in the Ethereum execution environment. A message contains:

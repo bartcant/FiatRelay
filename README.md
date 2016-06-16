@@ -6,7 +6,7 @@ Currently Smart contracts on Ethereum network are covered in Ether. Other Blockc
 Fiat Relay is an open-source initiative by Capgemini to provide an automated solution for existing smart contracts on Ethereum to immediately connect with a service to exchange  crypto currency to fiat and for payment delivery of the converted amount  through the regular banking payment network to an identified beneficiary.  
 This solution requires no need for the user to become a client of an existing crypto exchange or requires any manual action from the beneficiary for receiving the Pay-out amount in USD, provided that all mandatory and required payment information is available to the Fiat-Relay contract
 
-## functionality
+## Functionality
 The main functionality this solution provides include:
 
 1. verification of an Ethereum message that contains the Ether that is specified to be paid to a beneficiary
@@ -67,6 +67,7 @@ The Fiat-Relay solution contains a number of different components:
 
 
 Future Development:
+
 1. A Customer Portal: This is a Bank Application that provides a customer friendly Blockexplorer view of the blokchain transactions and data available in the smart contract
 1. A Mobile Notification Service: This notifies the User about the status of the payment
 

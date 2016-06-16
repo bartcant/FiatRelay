@@ -1,19 +1,23 @@
 # Fiat-Relay
 
-Fiat-Relay is an Ethereum Smart Contract and Banking solution that covers one of the immediate needs to the blockchain industry. Namely to provide an low cost, fast and automated solution to pay-out any Ether Balance that is the outcome of a Smart Contract that exist on the Ethereum blockchain.
-Currently Smart contracts on Ethereum network are covered in Ether. Other Blockchains are dealing with BTC or any other crypto currency. Due to the nature of the blockchain technology fiat currency can only be obtained after a user converts his or her crypto currency via an exchange (Coinbase, Poloniex, ShapeShift) and instructs the exchange to pay-out the fiat currency back to its original bankaccount on file. This process requires multiple steps by the user, and could lead up to 5-7 days of delay before final fiat converted amount is deposited on a bankaccount
+Fiat-Relay Smart contract is an Ethereum Smart Contract and Banking solution that covers one of the immediate needs for the blockchain industry. Namely, to provide an low cost, fast and automated solution for pay-out of any Ether Balance to a beneficiary that is the outcome of a Smart Contract execution on the Ethereum blockchain.
+Currently Smart contracts on Ethereum network are transactiong in Ether, the crypto-currency underpinning the Ethereum Blockchain. Other Blockchains are dealing in BTC or other types of crypto currency. Due to the nature of the blockchain technology fiat currency can only be obtained after a user converts his or her crypto currency via a Crypto-Exchange (Poloniex, ShapeShift, etc) and instructs the Crypto-Exchange to pay-out the converetd fiat currency back to the user's bank account on file. This process requires multiple steps by the user, and could lead up to 5-7 days of processing before final fiat converted amount is deposited on a bank account
 
-Fiat Relay is an open-source initiative by Capgemini to provide an automated solution for existing smart contracts on Ethereum to immediately connect with a service to exchange  crypto currency to fiat and for payment delivery of the converted amount  through the regular banking payment network to an identified beneficiary.  
-This solution requires no need for the user to become a client of an existing crypto exchange or requires any manual action from the beneficiary for receiving the Pay-out amount in USD, provided that all mandatory and required payment information is available to the Fiat-Relay contract
+Fiat Relay is an open-source initiative lead by Capgemini and participating financial institutions to provide an automated solution for existing smart contracts on Ethereum to immediately connect with:
+1. a service to exchange  crypto currency to fiat and
+1. for payment delivery of the converted fiat amount through the regular banking payment network to an identified beneficiary.  
+
+This solution no longer requires a user to become a client of an existing crypto exchange and removes any manual action from the beneficiary for receiving his/her  pay-out amount in USD, provided that all mandatory and required payment information is available to the Fiat-Relay Smart Contract.
 
 ## Functionality
-The main functionality this solution provides include:
+The main functionality this solution provides includes:
 
-1. verification of an Ethereum message that contains the Ether that is specified to be paid to a beneficiary
+1. Verification of an Ethereum message that contains the Ether that is specified to be paid to a beneficiary
 (eg. An Ethereum Contract has provided a payment for X amount of Ether to the Fiat-Relay smart contract)
-1. verification that payment details information is available for the disbursement of the Ether to the beneficiary
-1. Ability to update of the payment status based on the information received from the Bank and the Fiat Payment network
-1. Ability to return the ether funds back to the Originating Ethereum contract in case of failures (eg. insufficient or incorrect payment information, suspicious payment activity)
+1. Verification that the payment details information is available for the disbursement of the converted Ether amount to the beneficiary
+1. Ability to immediately and automatically convert Ether to Fiat using a participating crypto-Exchange provider
+1. Ability to update the payment status based on the information received from the Bank and the Fiat Payment network
+1. Ability to return Any Ether funds back to the Originating Ethereum contract in case of failures (eg. insufficient or incorrect payment information, suspicious payment activity, etc)
 
 Note: In Ethereum Contracts have the ability to send "messages" to other contracts. Messages are virtual objects that are never serialized and exist only in the Ethereum execution environment. A message contains:
 * The sender of the message (implicit)
@@ -30,14 +34,14 @@ Note: The gas allowance assigned by a transaction or contract applies to the tot
 # How it works
 ## Fiat Conversion and Payment
 
-The following diagram covers the base flow scenario that covers the situation where a smart contract has created a pay-out for a beneficiary in crypto-currency, that is consequently exchanged in fiat currency and a payment transfer is made to the identified beneficiary account holder who will receive the pay-out in his/her account 2-3 days later (based on the payment services SLA's from bank and the payment network)
+The following diagram covers the base flow scenario where a Smart cCntract has created a pay-out for a beneficiary in crypto-currency.  This crypto-currencyis consequently exchanged in fiat currency and a payment transfer is made to the identified beneficiary account holder who will receive the pay-out in his/her account 2-3 days later (based on the payment services SLA's from bank and the payment network)
 
 Diagram 1
 
 <img alt="Fiat Conversion and Payment" style="border-width:0" src="./Images/Fiatrelay1.png" /></a>
 
 ## Payment Status Notification
-In the diagram below, the scenario describes the functionality the bank and the fiat-relay smart contract  provide to to the original smart contract about the status of the payment transfer and final settlement
+In the diagram below, the scenario describes the functionality the bank and the Fiat-Relay Smart Contract and Relay Bank provide to to the original smart contract regarding the status update of the payment transfer and final settlement
 
 Diagram 2
 
@@ -45,7 +49,7 @@ Diagram 2
 
 
 ## Payment Return process
-In the diagram below, the scenario describes the situation where a payment was not successful. This could be due to missing or incorrect account information. In this case the fiat amount is converted back to the original crypto currency. This is done at the spot rate, which could lead to an increase of decrease of the original amount. This is amount is deposited back to the return address specified in the original transaction
+In the diagram below, the scenario describes the situation where a payment was not successful. This could be due to missing or incorrect account information. In this case the fiat amount is converted back to the original crypto currency, using a Crypto-Exchange. This is done at the spot rate, which could lead to an increase of decrease of the original crypto amount. This amount is deposited back to the return address specified in the original transaction by the Smart Contract.
 
 Diagram 3
 
@@ -56,8 +60,8 @@ Diagram 3
 
 The Fiat-Relay solution contains a number of different components:
 
-1. A Fiat-relay Smart Contract: This is an Ethereum contract that can be leveraged by other Ethereum Contracts for paying a Beneficiary Person, Company or Organization the Fiat equivalent of the Ether Balance on an Ethereum Account
-1. An Crypto Exchange Function:  This is an automated and real-time Ether to fiat Exchange (using an existing USD to Ether Exchange provider (eg. Poloniex or in the future Coinbase)
+1. A Fiat-Relay Smart Contract: This is an Ethereum contract that can be leveraged by other Ethereum Contracts for paying a Beneficiary Person, Company or Organization the Fiat equivalent of the Ether Balance on an Ethereum Account
+1. A Crypto Exchange:   This is an automated and real-time Ether-to-Fiat Exchange (using a participating Crypto-Exchange provider (eg. Poloniex or, in the future Coinbase)
 1. A Bank Payment Module: This is a Bank application that stores all records of the transactions and provides tools for customer service reps to investigate or follow up on on specific customer service issues. It provides payment translation services and integrates with the banks accounting system
 1. A Bank Payment Processor: This is a traditional bank payment solution leveraged to provide payment services for clients of the bank
 
@@ -75,12 +79,12 @@ Future Development:
 ----
 
 # Payment information
-For the Fiat-Relay contract and the payment transfer service to be successful, additional payment information is necessary
+For the Fiat-Relay contract and the payment transfer service to be successful, additional payment information is necessary.
 
 This information is required:
-* To identify the originator of the transaction
-* To identify the beneficiary for the payment service
-* And to guarantee compliance with all applicable laws (including AML, KYC and others as required)
+* to identify the originator of the transaction
+* to identify the beneficiary for the payment service
+* and to guarantee compliance with all applicable laws (including AML, KYC and others as required)
 
 Note: based on regulatory guidelines in the initial phase of the project the maximum fiat equivalent payment to any beneficiary is set to 1000 USD per transaction
 

@@ -67,8 +67,6 @@ The Fiat-Relay solution contains a number of different components:
 
 <img alt="Architecture" style="border-width:0" src="./Images/Architecture.png" /> </a>
 
-<img alt="Architecture" style="border-width:0" src="./Images/legend-architecture.png" /></a>
-
 
 Future Development:
 

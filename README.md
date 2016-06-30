@@ -293,6 +293,7 @@ This is an internal solution of the  participating bank. Its purpose is to provi
 1. Financial Message Gateway: Operate automated message interfaces to secure networks such as SWIFT, TELEX, ACH and Exchange reporting services  
 
 This generally already exists within a bank and very few changes are expected to the existing infrastructure and services already provided by the participating
+
 ----
 # License
 

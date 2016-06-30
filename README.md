@@ -28,7 +28,7 @@ Note: In Ethereum,  Contracts have the ability to send "messages" to other contr
 * The recipient of the message (in this case the Fiat-Relay Smart Contract End Point)
 * The amount of ether to transfer alongside the message: This is the amount of Ether to be converted to USD by the Fiat-Relay Contract
 * Optional data fields (See Payment Information section)
-* A Startgas value: This the gas  applies to the total gas consumed that will be consumed by the Fiat-Relay Smart Contract.
+* A Startgas value: Gas applies to the total gas that will be consumed by the Fiat-Relay Smart Contract.
 
 ----
 

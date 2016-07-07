@@ -152,21 +152,49 @@ For payment services exceeding 3000 USD additional payment information maybe req
 ----
 # Bank Payment Module
 
-The Bank Payment Module is a bank specific and bank owned software solution that links the Fiat-Relay Smart Contract to the internal processes of the participating Bank including payment services, compliance services, and accounting services. This module provides a structured service to oversee one or more payment transactions for a customer, taking into account customer specific rules and constraints
+The Bank Payment Module is a bank specific and bank owned software solution that links the Fiat-Relay Smart Contract to the internal processes of the participating Bank including payment services, compliance services, and accounting services. This module provides a structured service to oversee one or more payment transactions for a customer, taking into account customer specific rules and constraints.
 
 The following key capabilities are considered for this processes
 
 1. Payments Execution : Orchestrate the execution of payment transactions, with, and between bank using any appropriate payment mechanism (A/C, wire, ACH). This also includes translation and validation service of the specific format and associated rules
 
-1. Position Keeping:  Administer the financial transaction records.  This tracking will typically involve some form of double entry capture for integrity assurance and will be used for all aspects of fulfillment - e.g. transaction management, position derivation and financial booking.
+1. Position Keeping:  This includes administering the financial transaction records.  This tracking will typically involve some form of double entry capture for integrity assurance and will be used for all aspects of fulfillment - e.g. transaction management, position derivation and financial booking.
 
 1. Regulatory Compliance:  This includes all  regulatory requirements and defines a portfolio of regulatory compliance tests for the specific payment.
 
-1. Payment Support: To be completed
+1. Payment Support: This includes support function capabilities to monitor the Blockchain network, to view customer and transaction details and status, to query balances of bank-owned accounts, and initiate transactions.
 
-1. Transaction Reporting: To be completed
+1. Transaction Reporting: This includes ability to run realtime and historic reports to analyze usage and revenue trends. This also allows to look at usage trends regarding originators and beneficiaries.
 
-1. Transaction return process : To be completed
+1. Exchange Services: This includes the setup, maintenance and transaction services to exchange crypto-currency to fiat using the API services available through the Crypto-Exchange.
+
+1. Transaction return process : This includes capabilities to initiate return process of the fiat, convert it back to crypto-currency and transmit it to original account address or the specified return account address
+
+## Use cases
+
+Below you can find an inventory of use cases that are associated with the requirements for building the Bank Payment Module. Please note that this list of use cases and requirements can vary per financial institution and is therefore only indicative
+
+* UC1 : Login User/Administator: this could be a login to the web application or can be covered by an SSO or oAuth service
+* UC 2: View/Edit user preferences
+* UC 3: View payment queue
+* UC 4: Connect to Crypto-Exchange
+* UC 5: Initiate crypto-fiat exchange transfer
+* UC 6: Initiate Transfer to Payment Transfer Network
+* UC 7: View payment details
+* UC 8: Initiate compliance check
+* UC 9: Initiate accounting transaction
+* UC 10: Initiate refund transaction
+* UC 11: Initiate reconciliation process
+* UC 12: View dashboard
+* UC 13: Search transaction, customer
+* UC 14: View reporting list
+* UC 15: View reports
+* UC 16: View Blockchain network, account, transaction  information
+* UC 17: View transaction status
+* UC 18: View/Edit Administrator module
+* UC 19: view Bank-Account information
+* UC 20: Initiate manual transfer
+* UC 21: Initiate manual Ethereum transaction
 
 
 ---
@@ -177,14 +205,15 @@ There following API services are referenced and are build in the Bank Payment mo
 
 1. API services for exchanging Crypto-currency to Fiat on an participating crypto-currency
 1. API services to update "Status" of a Transaction
+1. API service for Support Functions
 
 
 ## API Services for Exchanging Crypto to Fiat on a participating Crypto-Exchange
 
 
-For exchanging crypto-currency to fiat the Fiat Relay will use an existing set of API services offered by a Crypto-Exchange. In the examples below, the APIs from Poloniex Exchange are referenced for illustrative purposes.
+For exchanging crypto-currency to fiat the Fiat Relay will use an existing set of API services offered by a Crypto-Exchange. In the examples below, the APIs from Poloniex Exchange are referenced for illustrative purposes. for additional documentation and information - please refer to https://poloniex.com/support/api/
 
-These APIs will be executed from the "Bank Payment Module" and allows the Bank to Transfer Crypto currencies to be replaced by Fiat currency on its bank account at the Crypto-Exchange
+These APIs will be executed from the "Bank Payment Module" and allows the Bank to transfer Crypto currencies to be replaced by Fiat currency on its bank account at the Crypto-Exchange
 
 ### Sell - API
 
@@ -256,7 +285,6 @@ The Bank module leverages the following  GetPaymentStatus API to retrieve the la
 The following are required parameters
 * `PaymentID`
 
-
 Sample output:
 ```
 {"PaymentID":23455,  PaymentStatus":RelayBank Accepted ,"PaymentStatusUpdateDateTime":" Payment was Accepted by the Relay Bank", "PaymentStatusUpdateDateTime": 2016-07-01-12:00"03AM-EDT}
@@ -271,18 +299,125 @@ The following suggested Payment status are available
 * `Payment Delivered`
 * `Payment Failed`
 
-## GetPaymentStatus API Service
 
-The Bank module leverages the following  GetPaymentStatus API to retrieve the latest Status from the Payment system
+## API Service for Support Functions
 
+This module leverages a set of Ethereum APIs that are commercially available by BlockCypher. For More information on these API services, please refer to  http://dev.blockcypher.com/eth/ .
+
+### Blockchain API
+
+This contains a an APIs that povide general query capabilities about Ethereum’s blockchain and blocks. There are 2 varaiations based on 2 different input paramters (blockchhash or blokheight)
+
+#### Input = blockhash
 The following are required parameters
-* `PaymentID`
+*`blockhash` : this is a string of characters representing a Hash of a certain block
 
+additional optional parameters include:
+* `txstart`: This filters response to only include transaction hashes after txstart in the block.
+* `limit`: this response to only include a maximum of limit transactions hashes in the block. Maximum value allowed is 500.
 
 Sample output:
 ```
-{"PaymentID":23455,  PaymentStatus":Relay Bank - Accepted ,"PaymentStatusUpdateDateTime":" Payment was Accepted by the Relay Bank", "PaymentStatusUpdateDateTime": 2016-07-01-12:00"03AM-EDT}
+'{
+  "hash": "e0c7c0b46e116b874354dce6f64b8581bd239186b03f30a978e3dc38656f723a",
+  "height": 7,
+  "chain": "ETH.main",
+  "total": 0,
+  "fees": 0,
+  "size": 1078,
+  "ver": 0,
+  "time": "2015-07-30T15:28:30Z",
+  "received_time": "2015-07-30T15:28:30Z",
+  "coinbase_addr": "dd2f1e6e498202e86d8f5442af596580a4f03c2c",
+  "relayed_by": "",
+  "nonce": 13599487003767981,
+  "n_tx": 0,
+  "prev_block": "1f1aed8e3694a067496c248e61879cda99b0709a1dfbacd0b693750df06b326e",
+  "mrkl_root": "ff8d97d9ca01ee59c793c4da2ba4ce8c31d358b42f216ab2f11af4bb097b6a2b",
+  "uncles": [
+    "4b8729311c5b59f418c5154fd54d85e6a8b42eabf83a1d3c05c754a8f10354cc"
+  ],
+  "txids": [],
+    "internal_txids": [],
+  "depth": 1656646,
+  "prev_block_url": "https://api.blockcypher.com/v1/eth/main/blocks/1f1aed8e3694a067496c248e61879cda99b0709a1dfbacd0b693750df06b326e",
+  "tx_url": "https://api.blockcypher.com/v1/eth/main/txs/"
+}'
 ```
+#### Input = blockheight
+
+The following are required parameters
+*`blockheight` : this is a string of characters representing a Hash of a certain block
+
+additional optional parameters include:
+* `txstart`: This filters response to only include transaction hashes after txstart in the block.
+* `limit`: this response to only include a maximum of limit transactions hashes in the block. Maximum value allowed is 500.
+
+Sample output:
+```
+{
+    "hash": "e0c7c0b46e116b874354dce6f64b8581bd239186b03f30a978e3dc38656f723a",
+    "height": 7,
+    "chain": "ETH.main",
+    "total": 0,
+    "fees": 0,
+    "size": 1078,
+    "ver": 0,
+    "time": "2015-07-30T15:28:30Z",
+    "received_time": "2015-07-30T15:28:30Z",
+    "coinbase_addr": "dd2f1e6e498202e86d8f5442af596580a4f03c2c",
+    "relayed_by": "",
+    "nonce": 13599487003767981,
+    "n_tx": 0,
+    "prev_block": "1f1aed8e3694a067496c248e61879cda99b0709a1dfbacd0b693750df06b326e",
+    "mrkl_root": "ff8d97d9ca01ee59c793c4da2ba4ce8c31d358b42f216ab2f11af4bb097b6a2b",
+    "uncles": [
+      "4b8729311c5b59f418c5154fd54d85e6a8b42eabf83a1d3c05c754a8f10354cc"
+    ],
+    "txids": [],
+    "depth": 1656646,
+    "prev_block_url": "https://api.blockcypher.com/v1/eth/main/blocks/1f1aed8e3694a067496c248e61879cda99b0709a1dfbacd0b693750df06b326e",
+    "tx_url": "https://api.blockcypher.com/v1/eth/main/txs/"
+  }
+```
+
+### Account Balance
+The Address Balance Endpoint is the simplest—and fastest—method to get a subset of information on a public address.
+
+To be further elaborated
+
+### Account Transaction
+The returned object contains information about the address, including its balance in wei, the number of transactions associated with it, and transaction summaries in descending order by block height.
+
+To be further elaborated
+
+### Generate Account Address
+The Generate Address endpoint allows you to generate private-public key-pairs along with an associated public address. No information is required with this POST request.
+
+To be further elaborated
+
+### Transaction API
+
+The Transaction API allows you to look up information about unconfirmed transactions, query transactions based on hash, and create and propagate your own transactions.
+
+To be further elaborated
+
+###  Transaction Hash endpoint
+The returned object contains detailed information about the transaction, including the value transfered, fees collected, date received, any scripts associated with an output, and more
+
+To be further elaborated
+
+### Create Transaction
+This API allows for the putting a transaction on the Ethereum network
+
+To be further elaborated
+
+### Transaction Events
+This API allows for listening to events related to a specific address on the Ethereum blockchain
+
+To be further elaborated
+
+
 ----
 
 # Payment network

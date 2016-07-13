@@ -1,6 +1,6 @@
 # Fiat-Relay
 
-Fiat-Relay Smart contract is a both an Ethereum Smart Contract and a Banking solution that covers one of the critical and immediate needs for the blockchain industry and Ethereum. Namely, to provide a low cost, fast and automated solution for an Ether pay-out of a smart contract execution to a beneficiary on the Ethereum blockchain.
+Fiat-Relay Smart contract is both an Ethereum Smart Contract and a Banking solution that covers one of the critical and immediate needs for the blockchain industry and Ethereum. Namely, to provide a low cost, fast and automated solution for an Ether pay-out of a smart contract execution to a beneficiary on the Ethereum blockchain.
 
 Currently, in Ethereum any value transactions that is managed  or is the outcome of a Smart Contracts is based in Ether, the crypto-currency underpinning the Ethereum Blockchain. Other Blockchains are dealing in BTC or other types of crypto currencies. Due to the nature of the blockchain technology Fiat currency can only be obtained after a user converts his or her crypto currency via a Crypto-Exchange (Poloniex, ShapeShift, etc) and instructs this Crypto-Exchange to pay-out the converted fiat amount back to the user's bank account on file. This process requires multiple steps by the user, and could lead up to 5-7 days of processing before the final fiat converted amount is deposited on a traditional bank account.
 

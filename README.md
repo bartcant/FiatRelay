@@ -302,11 +302,12 @@ The following suggested Payment status are available
 
 ## API Service for Support Functions
 
-This module leverages a set of Ethereum APIs that are commercially available by BlockCypher. For More information on these API services, please refer to  http://dev.blockcypher.com/eth/ .
+This module leverages a set of Ethereum APIs that are commercially available by BlockCypher. (© 2016 BlockCypher, Inc. Redwood City, CA) For More information on these API services, please refer to  http://dev.blockcypher.com/eth/
+
 
 ### Blockchain API
 
-This contains a an APIs that povide general query capabilities about Ethereum’s blockchain and blocks. There are 2 varaiations based on 2 different input paramters (blockchhash or blokheight)
+This contains a an APIs that provide general query capabilities about Ethereum’s blockchain and blocks. There are 2 variations based on 2 different input parameters (blockchhash or blokheight)
 
 #### Input = blockhash
 The following are required parameters
@@ -381,39 +382,34 @@ Sample output:
   }
 ```
 
-### Account Balance
-The Address Balance Endpoint is the simplest—and fastest—method to get a subset of information on a public address.
+### Account Balance API
+The Address Balance API can be used to get a subset of information on a public address.
 
 To be further elaborated
 
-### Account Transaction
-The returned object contains information about the address, including its balance in wei, the number of transactions associated with it, and transaction summaries in descending order by block height.
+### Account Transaction API
+The Account Transaction API is used to provide information about the address, including its balance in wei, the number of transactions associated with it, and transaction summaries in descending order by block height.
 
 To be further elaborated
 
-### Generate Account Address
-The Generate Address endpoint allows you to generate private-public key-pairs along with an associated public address. No information is required with this POST request.
+### Generate Account Address API
+The Generate Account Address API is used to  generate private-public key-pairs along with an associated public address. No information is required with this POST request.
 
 To be further elaborated
 
 ### Transaction API
 
-The Transaction API allows you to look up information about unconfirmed transactions, query transactions based on hash, and create and propagate your own transactions.
+The Transaction API is used to look up information about unconfirmed transactions, query transactions based on hash, and create and propagate your own transactions.
 
 To be further elaborated
 
-###  Transaction Hash endpoint
-The returned object contains detailed information about the transaction, including the value transfered, fees collected, date received, any scripts associated with an output, and more
-
-To be further elaborated
-
-### Create Transaction
-This API allows for the putting a transaction on the Ethereum network
+### Create Transaction API
+The Create Transaction API is used for putting a transaction on the Ethereum network
 
 To be further elaborated
 
 ### Transaction Events
-This API allows for listening to events related to a specific address on the Ethereum blockchain
+This Transaction Event API is used for listening to events related to a specific address on the Ethereum blockchain
 
 To be further elaborated
 

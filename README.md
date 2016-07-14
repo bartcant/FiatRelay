@@ -311,7 +311,7 @@ This contains a an APIs that provide general query capabilities about Ethereumâ€
 
 #### Input = blockhash
 The following are required parameters
-*`blockhash` : this is a string of characters representing a Hash of a certain block
+* `blockhash` : this is a string of characters representing a Hash of a certain block
 
 additional optional parameters include:
 * `txstart`: This filters response to only include transaction hashes after txstart in the block.

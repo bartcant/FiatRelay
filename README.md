@@ -125,6 +125,7 @@ The following payment information is required for the Fiat-Relay smart contract:
 * `Originator Address 2` - Optional
 * `Originator City`
 * `Originator State`
+* `Originator ZipPostal`
 * `Originator Country`
 * `Originator Telephone` - Optional
 * `Originator email address` - Optional
@@ -136,6 +137,7 @@ The following payment information is required for the Fiat-Relay smart contract:
 * `Beneficiary Address 2` - Optional
 * `Beneficiary City`
 * `Beneficiary State`
+* `Beneficiary ZipPostal`
 * `Beneficiary Country`
 * `Beneficiary Telephone` - Optional
 * `Beneficiary email address` - Optional

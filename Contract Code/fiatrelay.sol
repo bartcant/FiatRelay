@@ -1,35 +1,66 @@
-contract FiatRelay{
+# Disclaimer : This is experimental code not suitable for testing or production
+
+# FiatRelay Contract describing the collection of data elements necessary between an originator and a beneficiary.
+
+contract FiatRelay is mortal{
 
 
-    string public OriginatorName;
-    string public OriginatorAddress1;
-    string public OriginatorAddress2;
-    string public OriginatorCity;
-    string public OriginatorState;
-    string public OriginatorZipPostal;
-    string public OriginatorTelephone;
-    string public OriginatorEmailAddress;
-    string public OriginatorBCIdentity;
-    string public BeneficiaryName;
-    string public BeneficiaryBankAccountNumber;
-    string public BeneficiaryBankABANumber;
-    string public BeneficiaryAddress1;
-    string public BeneficiaryAddress2;
-    string public BeneficiaryCity;
-    string public BeneficiaryState;
-    string public BeneficiaryZipPostal;
-    string public BeneficiaryCountry;
-    string public BeneficiaryTelephone;
-    string public BeneficiaryEmailAddress;
-    string public BeneficiaryBCIdentity;
-    string public EtherAmount;
-    string public EthereumOriginatingAccount;
-    string public EthereumBankAccount;
-    string public ReturnEthereumAddress:
-    string public ReferenceMessage;
+
+    mapping (address=>Originator) public Originators
+    mapping (address=>BankProcessor) public BankProcessors
+
+    struct Originator {
+      bool Active;
+      uint LastUpdate;
+      string OriginatorName;
+      string OriginatorAddress1;
+      string OriginatorAddress2;
+      string OriginatorCity;
+      string OriginatorState;
+      string OriginatorZipPostal;
+      string OriginatorTelephone;
+      string OriginatorEmailAddress;
+      string OriginatorBCIdentity;
+      address EthereumOriginalAccount;
+      address ReturnEthereumAddress;
+    }
+
+    struct Benefiicary {
+      string BeneficiaryName;
+      string BeneficiaryBankAccountNumber;
+      string BeneficiaryBankABANumber;
+      string BeneficiaryAddress1;
+      string BeneficiaryAddress2;
+      string BeneficiaryCity;
+      string BeneficiaryState;
+      string BeneficiaryZipPostal;
+      string BeneficiaryCountry;
+      string BeneficiaryTelephone;
+      string BeneficiaryEmailAddress;
+      string BeneficiaryBCIdentity;
+
+    }
+
+    struct  BankProcessor {
+      bool Active;
+      uint LastUpdate;
+      address BankProcessorAddress;
+      string BankName;
+
+    }
+
+    struct Transaction  {
+
+      string Originator ;
+      string Beneficiary;
+      String Bankprocessor;
+      uint256 EtherAmount;
+      string ReferenceMessage;
+    }
 
 
-    function Originator (string _originatorname, string _originatoraddress1, string _originatoraddress2,
+
+    function SetOriginator (string _originatorname, string _originatoraddress1, string _originatoraddress2,
       string _originatorcity, string  _originatorstate, string _originatorstate, string _originatorzippostal,
       string _originatortelephone, string _originatoremailaddress, string _Originatorbcidentity ) {
 
@@ -45,7 +76,7 @@ contract FiatRelay{
 
     }
 
-    function Beneficiary (string _beneficiaryname,  string _beneficiarybankaccountnumber,
+    function SetBeneficiary (string _beneficiaryname,  string _beneficiarybankaccountnumber,
       string beneficiarybankabanumber, string _beneficiaryaddress1, string _beneficiaryaddress2,
       string _beneficiarycity, string  _beneficiarystate, string _beneficiaryzippostal, string _beneficiarytelephone,
       string _beneficiaryemailaddress, string _beneficiarybcidentity ) {
@@ -64,16 +95,43 @@ contract FiatRelay{
 
     }
 
-    function Amount (uint _amount) {
+    function Amount (uint _amount){
 
       EtherAmount = _amount;
 
-    Function BankProcessor (uint _bankprocessor) {
-
-      EthereumBankAccount = _bankprocessor
-      
-    }
 
     }
+
+    function OriginalAddress  (address _originaladdress) {
+
+        EthereumOriginatingAccount = originaladdress;
+
+    }
+
+}
+
+contract mortal{
+
+    address public owner;
+
+    function mortal() {
+
+      owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+      if (msg.sender != owner) {
+          throw;
+        } else {
+          -
+        }
+
+    }
+
+    function kill() onlyOwner{
+
+      suicide(owner);
+    }
+
 
 }

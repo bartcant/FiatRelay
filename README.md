@@ -123,8 +123,8 @@ The following payment information is required for the Fiat-Relay smart contract.
 
 * `Originator`: This can be a person or an Organization
 
-    `Person`: http://fibo.sdo-fibo.appspot.com/Person
-    `Organization`: http://fibo.sdo-fibo.appspot.com/Organization
+    ⋅⋅* `Person`: http://fibo.sdo-fibo.appspot.com/Person
+    ⋅⋅* `Organization`: http://fibo.sdo-fibo.appspot.com/Organization
 
     Attributes:
         `email`: http://fibo.sdo-fibo.appspot.com/email

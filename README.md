@@ -119,34 +119,69 @@ This information is required:
 
 Note: based on regulatory guidelines in the initial phase of the project the maximum fiat equivalent payment to any beneficiary is set to 1000 USD per transaction
 
-The following payment information is required for the Fiat-Relay smart contract:
-* `Originator Name`
-* `Originator address 1`
-* `Originator Address 2` - Optional
-* `Originator City`
-* `Originator State`
-* `Originator Country`
-* `Originator Telephone` - Optional
-* `Originator email address` - Optional
-* `Originator blockchain identity` (eg. Onename ID) - Optional
-* `Beneficiary Name`
-* `Beneficiary Bank Account number`
-* `Beneficiary Bank ABA Number`
-* `Beneficiary address 1`
-* `Beneficiary Address 2` - Optional
-* `Beneficiary City`
-* `Beneficiary State`
-* `Beneficiary Country`
-* `Beneficiary Telephone` - Optional
-* `Beneficiary email address` - Optional
-* `Beneficiary blockchain identity (eg, Onename ID)` - Optional
-* `Ether amount to transfer`
-* `Ethereum Originating Account` - This is the  smart contract initiating the transaction
-* `Ethereum Bank Account` - this is the bank owned Ethereum Account that will receive the funds in Ether
-* `Return Ethereum Address` - This is the return address incase the payment transaction is incomplete or invalid
-* `Reference Message` - Description that travels with the payment transaction
+The following payment information is required for the Fiat-Relay smart contract.
 
-For payment services exceeding 3000 USD additional payment information maybe required
+* `Originator`: This can be a person or an Organization
+
+    `Person`: http://fibo.sdo-fibo.appspot.com/Person
+
+    `Organization`: http://fibo.sdo-fibo.appspot.com/Organization
+
+    Attributes:
+      `email`: http://fibo.sdo-fibo.appspot.com/email
+      `familyName`: http://fibo.sdo-fibo.appspot.com/familyName
+      `givenName`: http://fibo.sdo-fibo.appspot.com/givenName
+      `telephone`: http://fibo.sdo-fibo.appspot.com/telephone
+      `duns`: http://fibo.sdo-fibo.appspot.com/duns (for Organization)
+      `taxid`: http://fibo.sdo-fibo.appspot.com/taxid (for Organization)
+      `blockchain identity` (eg. Onename ID) - Optional
+
+    `Postaladdress`:  http://fibo.sdo-fibo.appspot.com/PostalAddress`
+        `streetAddress`: http://fibo.sdo-fibo.appspot.com/streetAddress
+        `addressLocality`: http://fibo.sdo-fibo.appspot.com/addressLocality
+        `addressRegion` : http://fibo.sdo-fibo.appspot.com/addressRegion
+        `postalCode` : http://fibo.sdo-fibo.appspot.com/postalCode
+        `addressCountry` : http://fibo.sdo-fibo.appspot.com/addressCountry
+
+    `Originating Account` - This is the smart contract address initiating the transaction
+
+
+* `Beneficiary`: This can be a Person or an Organization
+
+    `Person`: http://fibo.sdo-fibo.appspot.com/Person
+    
+    `Organization`: http://fibo.sdo-fibo.appspot.com/Organization
+
+    Attributes:
+        `email`: http://fibo.sdo-fibo.appspot.com/email
+        `familyName`: http://fibo.sdo-fibo.appspot.com/familyName
+        `givenName`: http://fibo.sdo-fibo.appspot.com/givenName
+        `telephone`: http://fibo.sdo-fibo.appspot.com/telephone
+        `duns`: http://fibo.sdo-fibo.appspot.com/duns (for Organization only)
+        `taxid`: http://fibo.sdo-fibo.appspot.com/taxid (for Organization only)
+        `blockchain identity` (eg. Onename ID) - Optional
+
+    `Postaladdress`:  http://fibo.sdo-fibo.appspot.com/PostalAddress
+        `streetAddress`: http://fibo.sdo-fibo.appspot.com/streetAddress
+        `addressLocality`: http://fibo.sdo-fibo.appspot.com/addressLocality
+        `addressRegion` : http://fibo.sdo-fibo.appspot.com/addressRegion
+        `postalCode` : http://fibo.sdo-fibo.appspot.com/postalCode
+        `addressCountry` : http://fibo.sdo-fibo.appspot.com/addressCountry
+
+    `MoneyTransfer`:  http://fibo.sdo-fibo.appspot.com/MoneyTransfer
+        `MonetaryAmount`: http://fibo.sdo-fibo.appspot.com/MonetaryAmount
+        `currency`: http://fibo.sdo-fibo.appspot.com/currency : Note https://en.wikipedia.org/wiki/ISO_4217#Cryptocurrencies
+        `beneficiaryBank`: http://fibo.sdo-fibo.appspot.com/beneficiaryBank
+        `beneficiaryBankABA` - This is the ABA of the Beneficiary Bank
+        `beneficiaryBankAccountNumber` - this is the account number of the beneficiary
+        `Return Address` - This is the return address in case the payment transaction is incomplete or invalid
+
+
+Note: Acknowledgement
+
+These elements are mostly based on the work of the Financial Industry Business Ontology project (see http://www.fibo.org/schema for details), in support of the W3C Financial Industry Business Ontology Community Group (http://www.fibo.org/community). Many class and property definitions are inspired by or based on http://www.fibo.org.
+
+Note: For payment services exceeding 3000 USD additional payment information maybe required
 (see  FinCen regulation for Money Transmitters -  http://www.ecfr.gov/cgi-bin/text-idx?SID=2df5ac33e4575e7be6e95689037843e1&mc=true&node=se31.3.1010_1410&rgn=div8)
 
 ----
